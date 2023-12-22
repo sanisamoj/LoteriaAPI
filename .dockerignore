@@ -1,0 +1,6 @@
+prisma/migrations
+jest.config.ts
+node_modules
+src/Tests
+src/testServer.ts
+.gitignore

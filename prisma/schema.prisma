@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Mega {
+  id    String @id @default(uuid())
+  conc  Int    @unique
+  date  String
+  ball1 Int
+  ball2 Int
+  ball3 Int
+  ball4 Int
+  ball5 Int
+  ball6 Int
+}
+
+model Quina {
+  id    String @id @default(uuid())
+  conc  Int    @unique
+  date  String
+  ball1 Int
+  ball2 Int
+  ball3 Int
+  ball4 Int
+  ball5 Int
+}
+
+model Lotofacil {
+  id     String @id @default(uuid())
+  conc   Int    @unique
+  date   String
+  ball1  Int
+  ball2  Int
+  ball3  Int
+  ball4  Int
+  ball5  Int
+  ball6  Int
+  ball7  Int
+  ball8  Int
+  ball9  Int
+  ball10 Int
+  ball11 Int
+  ball12 Int
+  ball13 Int
+  ball14 Int
+  ball15 Int
+}
+
+model Lotomania {
+  id     String @id @default(uuid())
+  conc   Int    @unique
+  date   String
+  ball1  Int
+  ball2  Int
+  ball3  Int
+  ball4  Int
+  ball5  Int
+  ball6  Int
+  ball7  Int
+  ball8  Int
+  ball9  Int
+  ball10 Int
+  ball11 Int
+  ball12 Int
+  ball13 Int
+  ball14 Int
+  ball15 Int
+  ball16 Int
+  ball17 Int
+  ball18 Int
+  ball19 Int
+  ball20 Int
+}
+
+model Error {
+  id      String @id @default(uuid())
+  name    String
+  message String
+  stack   String
+}

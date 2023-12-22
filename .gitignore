@@ -1,0 +1,6 @@
+node_modules
+src/Tests
+jest.config.ts
+src/testServer.ts
+prisma/migrations
+.env

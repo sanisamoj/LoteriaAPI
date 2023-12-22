@@ -1,2 +1,2 @@
 # LoteriaAPI
-API que retorna os resultados dos jogos da loteria federal.
+API com os resultados dos concursos dos jogos da loteria federal
