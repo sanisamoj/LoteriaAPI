@@ -13,7 +13,7 @@ export class QuinaService {
     #ApiUrl: string = process.env.API_RESULTS + '/quina' as string
 
     //Registra um concurso da quina no banco de dados
-    async register(conc: QuinaType): Promise<void> {
+    async register(conc: QuinaType): Promise<void | null> {
 
         //Tenta registrar o dado no banco de dados
         try {
@@ -38,6 +38,8 @@ export class QuinaService {
 
             //Instancializa o servico responsável por registrar um erro no banco de dados
             await new ErrorService().register(error)
+
+            return null
 
         }
 
@@ -78,6 +80,66 @@ export class QuinaService {
 
             //Instancializa o servico responsável por registrar um erro no banco de dados
             await new ErrorService().register(error)
+
+        }
+
+        return
+
+    }
+
+    //Alternativa para atualizar todos os concursos
+    async updateResultsByApi(): Promise<void> {
+
+        //Desabilita a verificação do certificado ssl
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+
+        //Retorna a requisição
+        const result: AxiosResponse<any, any> = await axios.get(this.#ApiUrl)
+
+        //Atribui a variável aos resultados retornados
+        const quina_results: ApiType = result.data
+
+        //Número do concurso mais atual
+        const lastConc: number = quina_results.numero
+
+        //Irá realizar um loop em todos os concursos e irá atualizar o banco de dados
+        for (let i = lastConc; i > 1; i--) {
+
+            try {
+
+                //Retorna a requisição
+                const result: AxiosResponse<any, any> = await axios.get(this.#ApiUrl + `/${i}`)
+
+                //Atribui a variável aos resultados retornados
+                const quina_results: ApiType = result.data
+
+                //Cria o dado QuinaType, com os dados do concurso
+                const quinaConc: QuinaType = {
+                    date: quina_results.dataApuracao,
+                    conc: quina_results.numero,
+                    ball1: parseInt(quina_results.dezenasSorteadasOrdemSorteio[0]),
+                    ball2: parseInt(quina_results.dezenasSorteadasOrdemSorteio[1]),
+                    ball3: parseInt(quina_results.dezenasSorteadasOrdemSorteio[2]),
+                    ball4: parseInt(quina_results.dezenasSorteadasOrdemSorteio[3]),
+                    ball5: parseInt(quina_results.dezenasSorteadasOrdemSorteio[4]),
+                }
+
+                //Registra no banco de dados o concurso
+                const isNull: void | null = await this.register(quinaConc)
+
+                //Caso não consiga registrar, para por aqui
+                if(isNull === null) {
+
+                    return
+
+                }
+
+            } catch (error) {
+
+                //Instancializa o servico responsável por registrar um erro no banco de dados
+                await new ErrorService().register(error)
+
+            }
 
         }
 

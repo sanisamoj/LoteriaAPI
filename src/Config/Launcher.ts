@@ -33,16 +33,19 @@ export class Launcher {
         const resultsManager: ResultsManager = new ResultsManager()
 
         //Importa a partir de um arquivo excel todos os resultados dos sorteios da megasena
-        resultsManager.importResults<MegaExcel, MegaType>('mega', path.resolve(__dirname, '..', 'Services', 'Games', 'Mega', 'Results'))
+        await resultsManager.importResults<MegaExcel, MegaType>('mega', path.resolve(__dirname, '..', 'Services', 'Games', 'Mega', 'Results'))
 
         //Importa a partir de um arquivo excel todos os resultados dos sorteios da Quina
-        resultsManager.importResults<QuinaExcel, QuinaType>('quina', path.resolve(__dirname, '..', 'Services', 'Games', 'Quina', 'Results'))
+        await resultsManager.importResults<QuinaExcel, QuinaType>('quina', path.resolve(__dirname, '..', 'Services', 'Games', 'Quina', 'Results'))
 
         //Importa a partir de um arquivo excel todos os resultados dos sorteios da lotofacil
-        resultsManager.importResults<LotofacilExcel, LotofacilType>('lotofacil', path.resolve(__dirname, '..', 'Services', 'Games', 'Lotofacil', 'Results'))
+        await resultsManager.importResults<LotofacilExcel, LotofacilType>('lotofacil', path.resolve(__dirname, '..', 'Services', 'Games', 'Lotofacil', 'Results'))
 
         //Importa a partir de um arquivo excel todos os resultados dos sorteios da lotomania
-        resultsManager.importResults<LotomanialExcel, LotomaniaType>('lotomania', path.resolve(__dirname, '..', 'Services', 'Games', 'Lotomania', 'Results'))
+        await resultsManager.importResults<LotomanialExcel, LotomaniaType>('lotomania', path.resolve(__dirname, '..', 'Services', 'Games', 'Lotomania', 'Results'))
+
+        //Alternativa para atualizar os resultados faltarantes
+        this.updateResultsByApi()
     }
 
     //Inicia o atualizador de resultados
@@ -82,6 +85,17 @@ export class Launcher {
             await new LotomaniaService().updateResults()
 
         })  
+
+    }
+
+    //Alternativa para atualizar os resultados
+    async updateResultsByApi() {
+
+        //Tenta atualizar os resultados faltantes dos jogos
+        await new MegaService().updateResultsByApi()
+        await new QuinaService().updateResultsByApi()
+        await new LotofacilService().updateResultsByApi()
+        await new LotomaniaService().updateResultsByApi()
 
     }
 
