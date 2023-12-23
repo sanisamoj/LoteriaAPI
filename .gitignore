@@ -4,3 +4,4 @@ jest.config.ts
 src/testServer.ts
 prisma/migrations
 .env
+build

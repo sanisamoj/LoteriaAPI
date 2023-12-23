@@ -240,13 +240,4 @@ export class ResultsManager {
 
     }
 
-    async deleteAll() {
-
-        await prismaClient.error.deleteMany()
-        await prismaClient.mega.deleteMany()
-        await prismaClient.quina.deleteMany()
-
-
-    }
-
 }

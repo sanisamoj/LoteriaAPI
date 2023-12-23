@@ -92,10 +92,10 @@ export class Launcher {
     async updateResultsByApi() {
 
         //Tenta atualizar os resultados faltantes dos jogos
-        await new MegaService().updateResultsByApi()
-        await new QuinaService().updateResultsByApi()
-        await new LotofacilService().updateResultsByApi()
-        await new LotomaniaService().updateResultsByApi()
+        new MegaService().updateResultsByApi()
+        new QuinaService().updateResultsByApi()
+        new LotofacilService().updateResultsByApi()
+        new LotomaniaService().updateResultsByApi()
 
     }
 
