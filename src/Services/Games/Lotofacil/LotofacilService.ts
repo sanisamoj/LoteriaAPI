@@ -105,7 +105,7 @@ export class LotofacilService {
         const lastConc: number = quina_results.numero
 
         //Irá realizar um loop em todos os concursos e irá atualizar o banco de dados
-        for (let i = lastConc; i > 1; i--) {
+        for (let i = lastConc; i >= 1; i--) {
 
             try {
 
