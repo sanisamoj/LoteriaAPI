@@ -76,7 +76,7 @@ Dentro do Terminal do Ubuntu, execute os seguintes comando:
 
 5 - Após, ir até a pasta /etc/redis e editar o arquivo redis.conf digitando REQUIREPASS senha_aqui e alterar o .env REDIS_AUTH com a senha desejada.
 
-# iniciar o Servidor Redis:
+**# iniciar o Servidor Redis:**
 <br>
 Para iniciar o redis, execute o comando dentro do wsl:
 - sudo service redis-server start
