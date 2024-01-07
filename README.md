@@ -97,7 +97,6 @@ DATABASE_URL="postgresql://postgres:'senhaDoSeuPostgreSQL'@host.docker.internal:
 
 ## Exemplo de Uso
 
-O projeto está hospedado para visualização.
 Para obter os resultados dos jogos, faça uma solicitação HTTP GET para:
 
 http//:..../megasena/all - **Obtém todos os resultados já sorteados da Megasena**
